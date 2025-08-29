@@ -35,7 +35,7 @@ export function Navigation({ className }: NavigationProps) {
       <nav className={cn("hidden md:flex flex-col bg-card border-r border-border w-64 p-6", className)}>
         <div className="mb-8">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            🎮 Habit Hero
+            Habit Hero
           </h1>
           <p className="text-sm text-muted-foreground mt-1">Level up your life</p>
         </div>
@@ -77,7 +77,7 @@ export function Navigation({ className }: NavigationProps) {
         {/* Mobile Header */}
         <header className="flex items-center justify-between p-4 bg-card border-b border-border">
           <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            🎮 Habit Hero
+            Habit Hero
           </h1>
           <Button
             variant="ghost"
@@ -94,7 +94,7 @@ export function Navigation({ className }: NavigationProps) {
             <div className="fixed inset-y-0 left-0 w-3/4 max-w-sm bg-card border-r border-border p-6">
               <div className="flex items-center justify-between mb-6">
                 <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  🎮 Habit Hero
+                  Habit Hero
                 </h1>
                 <Button
                   variant="ghost"
