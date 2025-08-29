@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { HabitManager } from "@/components/habit-manager";
 import { HabitStorage, type Habit, type UserStats } from "@/lib/storage";
+import { Link } from "react-router-dom";
 import {
   Flame,
   Star,
@@ -130,8 +131,7 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary p-4 md:p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -302,37 +302,44 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Quick Stats */}
+        {/* Quick Stats & Navigation */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-streak">{habits.reduce((acc, h) => acc + h.streak, 0)}</div>
-              <div className="text-sm text-muted-foreground">Total Streaks</div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-xp">{userStats.totalXP}</div>
-              <div className="text-sm text-muted-foreground">Total XP</div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-success">{habits.reduce((acc, h) => acc + h.totalCompleted, 0)}</div>
-              <div className="text-sm text-muted-foreground">Completions</div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">{Math.max(...habits.map(h => h.streak))}</div>
-              <div className="text-sm text-muted-foreground">Best Streak</div>
-            </CardContent>
-          </Card>
+          <Link to="/analytics">
+            <Card className="cursor-pointer hover:scale-105 transition-transform">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-streak">{habits.reduce((acc, h) => acc + h.streak, 0)}</div>
+                <div className="text-sm text-muted-foreground">Total Streaks</div>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link to="/achievements">
+            <Card className="cursor-pointer hover:scale-105 transition-transform">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-xp">{userStats.totalXP}</div>
+                <div className="text-sm text-muted-foreground">Total XP</div>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link to="/motivation">
+            <Card className="cursor-pointer hover:scale-105 transition-transform">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-success">{habits.reduce((acc, h) => acc + h.totalCompleted, 0)}</div>
+                <div className="text-sm text-muted-foreground">Completions</div>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link to="/settings">
+            <Card className="cursor-pointer hover:scale-105 transition-transform">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-primary">{Math.max(...habits.map(h => h.streak))}</div>
+                <div className="text-sm text-muted-foreground">Best Streak</div>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
-      </div>
     </div>
   );
 }
