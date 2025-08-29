@@ -155,10 +155,12 @@ export default function Index() {
                   <span>XP Progress</span>
                   <span>{userStats.xp}/{userStats.xp + userStats.xpToNext}</span>
                 </div>
-                <Progress 
-                  value={(userStats.xp / (userStats.xp + userStats.xpToNext)) * 100} 
-                  className="bg-white/20"
-                />
+                <div className="bg-white/20 rounded-full h-2 overflow-hidden">
+                  <div
+                    className="h-full progress-gradient transition-all duration-300"
+                    style={{ width: `${(userStats.xp / (userStats.xp + userStats.xpToNext)) * 100}%` }}
+                  />
+                </div>
               </div>
               <div className="flex gap-2">
                 {userStats.badges.map((badge, index) => (
@@ -215,7 +217,12 @@ export default function Index() {
                 </span>
                 <span className="text-sm text-muted-foreground">habits completed</span>
               </div>
-              <Progress value={dailyProgress} className="h-3" />
+              <div className="bg-muted rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full progress-gradient transition-all duration-300"
+                  style={{ width: `${dailyProgress}%` }}
+                />
+              </div>
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>{Math.round(dailyProgress)}% complete</span>
                 <span>{totalHabits - completedToday} remaining</span>
