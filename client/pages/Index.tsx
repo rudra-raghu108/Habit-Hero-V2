@@ -3,51 +3,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { 
-  Plus, 
-  Flame, 
-  Star, 
-  TrendingUp, 
-  Calendar,
+import { HabitManager } from "@/components/habit-manager";
+import { HabitStorage, type Habit, type UserStats } from "@/lib/storage";
+import {
+  Flame,
+  Star,
   Zap,
   Target,
-  Award,
   Smile,
   Meh,
-  Frown
+  Frown,
+  Settings
 } from "lucide-react";
 
-interface Habit {
-  id: string;
-  name: string;
-  emoji: string;
-  streak: number;
-  lastCompleted: string | null;
-  totalCompleted: number;
-  target: number;
-  category: string;
-}
-
-interface Mood {
-  date: string;
-  mood: 'happy' | 'neutral' | 'sad';
-  note?: string;
-}
-
-interface UserStats {
-  level: number;
-  xp: number;
-  xpToNext: number;
-  totalXP: number;
-  badges: string[];
-}
-
-const SAMPLE_HABITS: Habit[] = [
-  { id: '1', name: 'Drink Water', emoji: '💧', streak: 7, lastCompleted: new Date().toISOString(), totalCompleted: 42, target: 8, category: 'Health' },
-  { id: '2', name: 'Read Books', emoji: '📚', streak: 3, lastCompleted: new Date().toISOString(), totalCompleted: 15, target: 1, category: 'Learning' },
-  { id: '3', name: 'Exercise', emoji: '🏃‍♂️', streak: 12, lastCompleted: new Date().toISOString(), totalCompleted: 28, target: 1, category: 'Fitness' },
-  { id: '4', name: 'Meditate', emoji: '🧘‍♀️', streak: 5, lastCompleted: new Date().toISOString(), totalCompleted: 20, target: 1, category: 'Wellness' },
-];
 
 const MOTIVATIONAL_QUOTES = [
   "Every accomplishment starts with the decision to try.",
@@ -58,18 +26,27 @@ const MOTIVATIONAL_QUOTES = [
 ];
 
 export default function Index() {
-  const [habits, setHabits] = useState<Habit[]>(SAMPLE_HABITS);
+  const [habits, setHabits] = useState<Habit[]>([]);
   const [todayMood, setTodayMood] = useState<'happy' | 'neutral' | 'sad' | null>(null);
-  const [userStats, setUserStats] = useState<UserStats>({
-    level: 5,
-    xp: 750,
-    xpToNext: 250,
-    totalXP: 1500,
-    badges: ['🔥', '💪', '📚', '⭐']
-  });
-  const [dailyQuote] = useState(() => 
+  const [userStats, setUserStats] = useState<UserStats>(HabitStorage.getUserStats());
+  const [showHabitManager, setShowHabitManager] = useState(false);
+  const [dailyQuote] = useState(() =>
     MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)]
   );
+
+  // Load data from localStorage on mount
+  useEffect(() => {
+    const savedHabits = HabitStorage.getHabits();
+    const calculatedHabits = HabitStorage.calculateStreaks(savedHabits);
+    setHabits(calculatedHabits);
+
+    const todayMoodData = HabitStorage.getTodayMood();
+    if (todayMoodData) {
+      setTodayMood(todayMoodData.mood);
+    }
+
+    setUserStats(HabitStorage.getUserStats());
+  }, []);
 
   const today = new Date().toDateString();
   const completedToday = habits.filter(h => 
@@ -80,11 +57,11 @@ export default function Index() {
   const dailyProgress = totalHabits > 0 ? (completedToday / totalHabits) * 100 : 0;
 
   const toggleHabit = (habitId: string) => {
-    setHabits(prev => prev.map(habit => {
+    const updatedHabits = habits.map(habit => {
       if (habit.id === habitId) {
-        const isCompletedToday = habit.lastCompleted && 
+        const isCompletedToday = habit.lastCompleted &&
           new Date(habit.lastCompleted).toDateString() === today;
-        
+
         if (isCompletedToday) {
           // Uncomplete habit
           return {
@@ -95,28 +72,45 @@ export default function Index() {
           };
         } else {
           // Complete habit
-          return {
+          const updatedHabit = {
             ...habit,
             lastCompleted: new Date().toISOString(),
             streak: habit.streak + 1,
             totalCompleted: habit.totalCompleted + 1
           };
+
+          // Check for streak badges
+          const streakBadges = HabitStorage.checkStreakBadges(updatedHabit);
+          if (streakBadges.length > 0) {
+            const currentStats = HabitStorage.getUserStats();
+            const newBadges = [...currentStats.badges, ...streakBadges.filter(b => !currentStats.badges.includes(b))];
+            HabitStorage.saveUserStats({ ...currentStats, badges: newBadges });
+          }
+
+          return updatedHabit;
         }
       }
       return habit;
-    }));
+    });
 
-    // Add XP for completing habit
-    setUserStats(prev => {
-      const newXP = prev.xp + 25;
-      const newLevel = Math.floor(newXP / 1000) + 1;
-      return {
-        ...prev,
-        xp: newXP % 1000,
-        level: newLevel,
-        xpToNext: 1000 - (newXP % 1000),
-        totalXP: prev.totalXP + 25
-      };
+    setHabits(updatedHabits);
+    HabitStorage.saveHabits(updatedHabits);
+
+    // Award XP for completing habit
+    const { newStats } = HabitStorage.awardXP(25);
+    setUserStats(newStats);
+  };
+
+  const handleHabitsChange = (newHabits: Habit[]) => {
+    setHabits(newHabits);
+    HabitStorage.saveHabits(newHabits);
+  };
+
+  const handleMoodChange = (mood: 'happy' | 'neutral' | 'sad') => {
+    setTodayMood(mood);
+    HabitStorage.addMood({
+      date: new Date().toISOString(),
+      mood
     });
   };
 
@@ -193,7 +187,7 @@ export default function Index() {
                       key={mood}
                       variant={todayMood === mood ? "default" : "outline"}
                       size="sm"
-                      onClick={() => setTodayMood(mood)}
+                      onClick={() => handleMoodChange(mood)}
                       className="px-3"
                     >
                       {getMoodIcon(mood)}
@@ -230,15 +224,28 @@ export default function Index() {
           </CardContent>
         </Card>
 
-        {/* Habits Grid */}
+        {/* Habits Section */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">Your Habits</h2>
-            <Button className="gradient-primary border-0 text-white">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Habit
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={() => setShowHabitManager(!showHabitManager)}
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Manage
+              </Button>
+            </div>
           </div>
+
+          {showHabitManager && (
+            <Card>
+              <CardContent className="p-6">
+                <HabitManager habits={habits} onHabitsChange={handleHabitsChange} />
+              </CardContent>
+            </Card>
+          )}
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {habits.map((habit) => {
