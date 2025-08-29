@@ -135,9 +135,9 @@ export default function Index() {
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            🎮 Habit Hero
+            Habit Hero
           </h1>
-          <p className="text-muted-foreground text-lg">Level up your life, one habit at a time</p>
+          <p className="text-muted-foreground text-lg">Level up your life</p>
         </div>
 
         {/* User Stats & Daily Quote */}
