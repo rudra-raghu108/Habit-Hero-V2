@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Award, Star, Flame, Crown, Zap, Target, TrendingUp, Calendar } from "lucide-react";
+import { Award, Star, Flame, Crown, Zap, Target, TrendingUp, Calendar, Share } from "lucide-react";
 import type { Habit, UserStats } from "@/lib/storage";
 
 interface Achievement {
@@ -167,6 +167,20 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
   const totalCount = achievements.length;
   const completionPercentage = totalCount > 0 ? (unlockedCount / totalCount) * 100 : 0;
 
+  const shareAchievements = () => {
+    const unlockedAchievements = achievements.filter(a => a.unlocked);
+    const shareText = `🏆 My Habit Hero Achievements!\n\n${Math.round(completionPercentage)}% Complete (${unlockedCount}/${totalCount})\n\nRecent Unlocks:\n${unlockedAchievements.slice(-3).map(a => `${a.icon} ${a.title}`).join('\n')}\n\nLevel up your habits with Habit Hero! 🎮`;
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'My Habit Hero Achievements',
+        text: shareText
+      });
+    } else {
+      navigator.clipboard.writeText(shareText);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -179,9 +193,20 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
             {unlockedCount} of {totalCount} achievements unlocked
           </p>
         </div>
-        <div className="text-right">
-          <div className="text-2xl font-bold text-primary">{Math.round(completionPercentage)}%</div>
-          <Progress value={completionPercentage} className="w-24 mt-1" />
+        <div className="flex items-center gap-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => shareAchievements()}
+            className="flex items-center gap-2"
+          >
+            <Share className="w-4 h-4" />
+            Share Progress
+          </Button>
+          <div className="text-right">
+            <div className="text-2xl font-bold text-primary">{Math.round(completionPercentage)}%</div>
+            <Progress value={completionPercentage} className="w-24 mt-1" />
+          </div>
         </div>
       </div>
 
