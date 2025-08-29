@@ -6,7 +6,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen light-mode-gradient">
       <div className="flex">
         <Navigation />
         <main className="flex-1 md:ml-0">

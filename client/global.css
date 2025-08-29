@@ -122,4 +122,12 @@
   .progress-gradient {
     background: linear-gradient(135deg, #efefbb 0%, #d4d3dd 100%);
   }
+
+  .light-mode-gradient {
+    background: linear-gradient(135deg, #efefbb 0%, #d4d3dd 100%);
+  }
+
+  .dark .light-mode-gradient {
+    background: hsl(var(--background));
+  }
 }
