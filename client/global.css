@@ -84,16 +84,16 @@
     --ring: 142 76% 36%;
 
     --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
+    --success-foreground: 1 15% 94%;
 
     --warning: 32 95% 44%;
-    --warning-foreground: 0 0% 100%;
+    --warning-foreground: 1 15% 94%;
 
     --streak: 14 100% 57%;
-    --streak-foreground: 0 0% 100%;
+    --streak-foreground: 1 15% 94%;
 
     --xp: 262 83% 58%;
-    --xp-foreground: 0 0% 100%;
+    --xp-foreground: 1 15% 94%;
   }
 }
 
