@@ -206,7 +206,12 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
           </Button>
           <div className="text-right">
             <div className="text-2xl font-bold text-primary">{Math.round(completionPercentage)}%</div>
-            <Progress value={completionPercentage} className="w-24 mt-1" />
+            <div className="bg-muted rounded-full h-2 w-24 mt-1 overflow-hidden">
+              <div
+                className="h-full progress-gradient transition-all duration-300"
+                style={{ width: `${completionPercentage}%` }}
+              />
+            </div>
           </div>
         </div>
       </div>
