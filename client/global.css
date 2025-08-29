@@ -11,23 +11,23 @@
    * HSL format required for Tailwind CSS variables
    */
   :root {
-    --background: 57 30% 88%;
-    --foreground: 240 10% 12%;
+    --background: 14 64% 89%;
+    --foreground: 0 1% 43%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 12%;
+    --card: 14 64% 94%;
+    --card-foreground: 0 1% 43%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 12%;
+    --popover: 14 64% 94%;
+    --popover-foreground: 0 1% 43%;
 
     --primary: 142 76% 36%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 6% 84%;
-    --secondary-foreground: 240 10% 12%;
+    --secondary: 14 64% 85%;
+    --secondary-foreground: 0 1% 43%;
 
-    --muted: 45 100% 92%;
-    --muted-foreground: 240 6% 50%;
+    --muted: 14 64% 90%;
+    --muted-foreground: 0 1% 55%;
 
     --accent: 32 95% 44%;
     --accent-foreground: 0 0% 100%;
@@ -55,22 +55,22 @@
   }
 
   .dark {
-    --background: 222 21% 53%;
+    --background: 30 33% 5%;
     --foreground: 1 15% 94%;
 
-    --card: 222 21% 48%;
+    --card: 30 33% 8%;
     --card-foreground: 1 15% 94%;
 
-    --popover: 222 21% 48%;
+    --popover: 30 33% 8%;
     --popover-foreground: 1 15% 94%;
 
     --primary: 142 76% 36%;
     --primary-foreground: 1 15% 94%;
 
-    --secondary: 222 21% 58%;
+    --secondary: 30 33% 12%;
     --secondary-foreground: 1 15% 94%;
 
-    --muted: 222 21% 58%;
+    --muted: 30 33% 10%;
     --muted-foreground: 1 15% 85%;
 
     --accent: 32 95% 44%;
@@ -79,8 +79,8 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 1 15% 94%;
 
-    --border: 222 21% 38%;
-    --input: 222 21% 38%;
+    --border: 30 33% 15%;
+    --input: 30 33% 15%;
     --ring: 142 76% 36%;
 
     --success: 142 76% 36%;
