@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Award, Star, Flame, Crown, Zap, Target, TrendingUp, Calendar, Share } from "lucide-react";
+import { AchievementCard } from "@/components/achievement-card";
 import type { Habit, UserStats } from "@/lib/storage";
 
 interface Achievement {
@@ -229,51 +230,7 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-4">
                   {categoryAchievements.map(achievement => (
-                    <div
-                      key={achievement.id}
-                      className={`p-4 rounded-lg border-2 transition-all ${
-                        achievement.unlocked 
-                          ? getRarityColor(achievement.rarity)
-                          : 'border-gray-200 bg-gray-50 opacity-60'
-                      }`}
-                    >
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-2xl">{achievement.icon}</span>
-                          <div>
-                            <h3 className={`font-medium ${achievement.unlocked ? '' : 'text-gray-500'}`}>
-                              {achievement.title}
-                            </h3>
-                            <Badge 
-                              variant="outline" 
-                              className={`text-xs ${getRarityBadgeColor(achievement.rarity)}`}
-                            >
-                              {achievement.rarity}
-                            </Badge>
-                          </div>
-                        </div>
-                        {achievement.unlocked && (
-                          <div className="text-green-500">
-                            <Star className="w-5 h-5 fill-current" />
-                          </div>
-                        )}
-                      </div>
-                      
-                      <p className={`text-sm mb-3 ${achievement.unlocked ? 'text-foreground' : 'text-gray-500'}`}>
-                        {achievement.description}
-                      </p>
-                      
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-xs">
-                          <span>Progress</span>
-                          <span>{Math.min(achievement.progress, achievement.requirement)} / {achievement.requirement}</span>
-                        </div>
-                        <Progress 
-                          value={(achievement.progress / achievement.requirement) * 100} 
-                          className="h-2"
-                        />
-                      </div>
-                    </div>
+                    <AchievementCard key={achievement.id} achievement={achievement} />
                   ))}
                 </div>
               </CardContent>
