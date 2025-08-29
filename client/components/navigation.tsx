@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Home, 
-  BarChart3, 
-  Award, 
+import {
+  Home,
+  BarChart3,
+  Award,
   Heart,
   Settings,
-  Menu,
+  PanelLeftOpen,
   X
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { HabitStorage, type UserStats } from "@/lib/storage";
 
 interface NavigationProps {
   className?: string;
@@ -27,7 +28,18 @@ const navItems = [
 
 export function Navigation({ className }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [userStats, setUserStats] = useState<UserStats>(HabitStorage.getUserStats());
   const location = useLocation();
+
+  useEffect(() => {
+    const updateStats = () => {
+      setUserStats(HabitStorage.getUserStats());
+    };
+
+    // Update stats periodically
+    const interval = setInterval(updateStats, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -63,7 +75,7 @@ export function Navigation({ className }: NavigationProps) {
         <div className="mt-auto pt-6 border-t border-border">
           <div className="text-center space-y-2">
             <Badge variant="outline" className="gradient-xp border-0 text-white">
-              🏆 Level 5 Hero
+              🏆 Level {userStats.level} Hero
             </Badge>
             <p className="text-xs text-muted-foreground">
               Keep building those habits!
@@ -75,16 +87,14 @@ export function Navigation({ className }: NavigationProps) {
       {/* Mobile Navigation */}
       <div className="md:hidden">
         {/* Mobile Header */}
-        <header className="flex items-center justify-between p-4 bg-card border-b border-border">
-          <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Habit Hero
-          </h1>
+        <header className="flex items-center justify-end p-4 bg-card border-b border-border">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2"
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <PanelLeftOpen className="w-6 h-6" />}
           </Button>
         </header>
 
@@ -131,7 +141,7 @@ export function Navigation({ className }: NavigationProps) {
               
               <div className="mt-auto">
                 <Badge variant="outline" className="gradient-xp border-0 text-white">
-                  🏆 Level 5 Hero
+                  🏆 Level {userStats.level} Hero
                 </Badge>
               </div>
             </div>
