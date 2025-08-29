@@ -195,7 +195,12 @@ export function ProgressCharts({ habits, moods }: ProgressChartsProps) {
                     <div key={day.date} className="flex items-center gap-3">
                       <div className="w-12 text-sm font-medium">{dayName}</div>
                       <div className="flex-1">
-                        <Progress value={percentage} className="h-2" />
+                        <div className="bg-muted rounded-full h-2 overflow-hidden">
+                          <div
+                            className="h-full progress-gradient transition-all duration-300"
+                            style={{ width: `${percentage}%` }}
+                          />
+                        </div>
                       </div>
                       <div className="w-16 text-sm text-muted-foreground">
                         {day.completed}/{day.total}
@@ -257,7 +262,12 @@ export function ProgressCharts({ habits, moods }: ProgressChartsProps) {
                     <Badge variant="outline">{stat.percentage}%</Badge>
                   </div>
                   <div className="space-y-2">
-                    <Progress value={stat.percentage} />
+                    <div className="bg-muted rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full progress-gradient transition-all duration-300"
+                        style={{ width: `${stat.percentage}%` }}
+                      />
+                    </div>
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>{stat.completed} completed</span>
                       <span>{stat.total} total</span>

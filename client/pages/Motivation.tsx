@@ -229,7 +229,12 @@ export default function Motivation() {
               <span className="font-medium">Weekly Progress</span>
               <span className="text-sm text-muted-foreground">{stats.completionRate}%</span>
             </div>
-            <Progress value={stats.completionRate} className="h-3" />
+            <div className="bg-muted rounded-full h-3 overflow-hidden">
+              <div
+                className="h-full progress-gradient transition-all duration-300"
+                style={{ width: `${stats.completionRate}%` }}
+              />
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 pt-4 border-t">
