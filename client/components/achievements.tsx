@@ -59,6 +59,7 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [newlyUnlocked, setNewlyUnlocked] = useState<Achievement[]>([]);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [shownAchievements, setShownAchievements] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const updatedAchievements = ACHIEVEMENTS_CONFIG.map(config => {
@@ -72,17 +73,22 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
       };
     });
 
-    // Check for newly unlocked achievements
-    const previouslyUnlocked = achievements.filter(a => a.unlocked).map(a => a.id);
-    const currentlyUnlocked = updatedAchievements.filter(a => a.unlocked).map(a => a.id);
-    const newUnlocks = updatedAchievements.filter(a => 
-      a.unlocked && !previouslyUnlocked.includes(a.id)
+    // Check for newly unlocked achievements that haven't been shown before
+    const newUnlocks = updatedAchievements.filter(a =>
+      a.unlocked && !shownAchievements.has(a.id)
     );
 
     if (newUnlocks.length > 0) {
       setNewlyUnlocked(newUnlocks);
       setShowCelebration(true);
-      
+
+      // Mark these achievements as shown
+      setShownAchievements(prev => {
+        const newSet = new Set(prev);
+        newUnlocks.forEach(achievement => newSet.add(achievement.id));
+        return newSet;
+      });
+
       // Award badges for new achievements
       newUnlocks.forEach(achievement => {
         onBadgeUnlocked(achievement.badge);
@@ -90,7 +96,7 @@ export function Achievements({ habits, userStats, onBadgeUnlocked }: Achievement
     }
 
     setAchievements(updatedAchievements);
-  }, [habits, userStats]);
+  }, [habits, userStats, shownAchievements]);
 
   const calculateProgress = (config: Omit<Achievement, 'unlocked' | 'progress'>, habits: Habit[], userStats: UserStats): number => {
     switch (config.category) {

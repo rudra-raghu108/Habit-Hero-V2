@@ -66,7 +66,7 @@ export function AchievementCard({ achievement }: AchievementCardProps) {
           <div className="flex items-center gap-3">
             <span className="text-3xl">{achievement.icon}</span>
             <div>
-              <h3 className={`font-semibold ${achievement.unlocked ? '' : 'text-gray-500'}`}>
+              <h3 className={`font-semibold ${achievement.unlocked ? 'text-black' : 'text-gray-500'}`}>
                 {achievement.title}
               </h3>
               <Badge 
@@ -96,7 +96,7 @@ export function AchievementCard({ achievement }: AchievementCardProps) {
           </div>
         </div>
         
-        <p className={`text-sm ${achievement.unlocked ? 'text-foreground' : 'text-gray-500'}`}>
+        <p className={`text-sm ${achievement.unlocked ? 'text-gray-700' : 'text-gray-500'}`}>
           {achievement.description}
         </p>
         
