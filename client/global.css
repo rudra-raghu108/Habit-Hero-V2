@@ -130,4 +130,8 @@
   .dark .light-mode-gradient {
     background: hsl(var(--background));
   }
+
+  .gradient-motivation {
+    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  }
 }
