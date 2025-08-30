@@ -147,7 +147,7 @@ export default function Motivation() {
       </div>
 
       {/* Daily Quote */}
-      <Card className="gradient-primary text-white border-0">
+      <Card className="gradient-motivation text-white border-0">
         <CardHeader className="text-center">
           <CardTitle className="flex items-center justify-center gap-2 text-white">
             <Quote className="w-6 h-6" />
@@ -171,7 +171,7 @@ export default function Motivation() {
       </Card>
 
       {/* Daily Affirmation */}
-      <Card className="gradient-xp text-white border-0">
+      <Card className="gradient-motivation text-white border-0">
         <CardHeader className="text-center">
           <CardTitle className="flex items-center justify-center gap-2 text-white">
             <Star className="w-6 h-6" />
