@@ -2,7 +2,8 @@
 
 > **Level up your life** through the power of consistent habits
 
-![Habit Hero Dashboard](https://c62e3eba2f264cd387a6196f5f1f837f-602d0471d82a419a8bc076f2e.fly.dev/)
+<img width="1900" height="1020" alt="Screenshot 2025-08-30 233913" src="https://github.com/user-attachments/assets/d96c280b-f477-4e92-9fd4-c9ac102376b4" />
+
 
 Habit Hero transforms daily routines into an engaging, gamified experience. Build lasting habits, track your progress, and unlock your potential with beautiful gradients, motivational quotes, and achievement-based rewards.
 
