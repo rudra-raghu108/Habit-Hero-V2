@@ -116,7 +116,7 @@
   }
 
   .gradient-xp {
-    background: linear-gradient(135deg, hsl(var(--xp)) 0%, hsl(var(--primary)) 100%);
+    background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
   }
 
   .progress-gradient {
