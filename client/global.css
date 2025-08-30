@@ -134,4 +134,20 @@
   .gradient-motivation {
     background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
   }
+
+  .gradient-hero-title {
+    background: linear-gradient(135deg, hsl(var(--xp)) 0%, hsl(var(--primary)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Pluvix Luxury", serif; /* Will fallback to serif until font is loaded */
+  }
+
+  .gradient-hero-subtitle {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Wensley Modern Serif", serif; /* Will fallback to serif until font is loaded */
+  }
 }
