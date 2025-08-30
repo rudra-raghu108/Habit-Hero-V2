@@ -144,7 +144,7 @@
   }
 
   .gradient-hero-subtitle {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    background-image: radial-gradient( circle 349px at 0.3% 48.6%,  rgba(0,0,0,1) 0%, rgba(87,124,253,0.89) 100.7% );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
