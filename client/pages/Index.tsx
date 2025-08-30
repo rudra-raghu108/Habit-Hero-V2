@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { HabitManager } from "@/components/habit-manager";
 import { HabitStorage, type Habit, type UserStats } from "@/lib/storage";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import {
   Flame,
   Star,
