@@ -44,7 +44,7 @@ export function Navigation({ className }: NavigationProps) {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className={cn("hidden md:flex flex-col bg-card border-r border-border w-64 p-6", className)}>
+      <nav className={cn("hidden md:flex flex-col bg-card border-r border-border w-52 p-6", className)}>
         <div className="mb-8">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Habit Hero
