@@ -135,10 +135,10 @@ export default function Index() {
     <div className="space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold gradient-hero-title">
             Habit Hero
           </h1>
-          <p className="text-muted-foreground text-lg">Level up your life</p>
+          <p className="text-lg gradient-hero-subtitle">Level up your life</p>
         </div>
 
         {/* User Stats & Daily Quote */}
