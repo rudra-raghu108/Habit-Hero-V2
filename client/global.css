@@ -108,7 +108,7 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
   }
 
   .gradient-streak {
@@ -120,7 +120,7 @@
   }
 
   .progress-gradient {
-    background: linear-gradient(135deg, #efefbb 0%, #d4d3dd 100%);
+    background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
   }
 
   .light-mode-gradient {
