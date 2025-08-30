@@ -172,17 +172,17 @@ export default function Index() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="gradient-primary text-white border-0">
             <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2">
-                <Star className="w-6 h-6 text-yellow-500" />
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Star className="w-6 h-6" />
                 Daily Motivation
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-foreground/80 italic">"{dailyQuote}"</p>
+              <p className="text-white/80 italic">"{dailyQuote}"</p>
               <div className="mt-4 space-y-2">
-                <p className="text-sm font-medium">How are you feeling today?</p>
+                <p className="text-sm font-medium text-white">How are you feeling today?</p>
                 <div className="flex gap-2">
                   {(['happy', 'neutral', 'sad'] as const).map((mood) => (
                     <Button
@@ -190,7 +190,12 @@ export default function Index() {
                       variant={todayMood === mood ? "default" : "outline"}
                       size="sm"
                       onClick={() => handleMoodChange(mood)}
-                      className="px-3"
+                      className={cn(
+                        "px-3",
+                        todayMood === mood
+                          ? "bg-white/20 text-white border-white/20 hover:bg-white/30"
+                          : "bg-transparent border-white/40 text-white hover:bg-white/20"
+                      )}
                     >
                       {getMoodIcon(mood)}
                     </Button>
