@@ -46,10 +46,10 @@ export function Navigation({ className }: NavigationProps) {
       {/* Desktop Navigation */}
       <nav className={cn("hidden md:flex flex-col bg-card border-r border-border w-52 p-6", className)}>
         <div className="mb-8">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold gradient-hero-title">
             Habit Hero
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">Level up your life</p>
+          <p className="text-sm mt-1 gradient-hero-subtitle">Level up your life</p>
         </div>
         
         <div className="space-y-2 flex-1">
