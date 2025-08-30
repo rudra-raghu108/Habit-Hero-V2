@@ -136,18 +136,28 @@
   }
 
   .gradient-hero-title {
-    background: linear-gradient(135deg, hsl(var(--xp)) 0%, hsl(var(--primary)) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--xp)) 0%,
+      hsl(var(--primary)) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: "Pluvix Luxury", serif; /* Will fallback to serif until font is loaded */
+    font-family:
+      "Pluvix Luxury", serif; /* Will fallback to serif until font is loaded */
   }
 
   .gradient-hero-subtitle {
-    background-image: radial-gradient( circle 349px at 0.3% 48.6%,  rgba(0,0,0,1) 0%, rgba(87,124,253,0.89) 100.7% );
+    background-image: radial-gradient(
+      circle 349px at 0.3% 48.6%,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(87, 124, 253, 0.89) 100.7%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: "Wensley Modern Serif", serif; /* Will fallback to serif until font is loaded */
+    font-family:
+      "Wensley Modern Serif", serif; /* Will fallback to serif until font is loaded */
   }
 }
