@@ -103,7 +103,7 @@ export function Navigation({ className }: NavigationProps) {
           <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
             <div className="fixed inset-y-0 left-0 w-3/4 max-w-sm bg-card border-r border-border p-6">
               <div className="flex items-center justify-between mb-6">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold gradient-hero-title">
                   Habit Hero
                 </h1>
                 <Button
