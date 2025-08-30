@@ -173,7 +173,7 @@ export default function Index() {
             </CardContent>
           </Card>
 
-          <Card className="gradient-primary text-white border-0">
+          <Card className="gradient-motivation text-white border-0">
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-white">
                 <Star className="w-6 h-6" />
